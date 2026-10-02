@@ -2,14 +2,8 @@ name: Scrape prices and deploy
 
 on:
   schedule:
-<<<<<<< HEAD
     - cron: '0 6 * * *'
   workflow_dispatch:
-=======
-    # Каждый день в 06:00 UTC (09:00 МСК)
-    - cron: '0 6 * * *'
-  workflow_dispatch:  # позволяет запускать вручную
->>>>>>> cc26e8c0f13f3fd7a153c9ed0a3c385f6efd10ca
 
 permissions:
   contents: write
