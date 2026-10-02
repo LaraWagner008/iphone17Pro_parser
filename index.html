@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone 17 Pro 512GB — Динамика цен</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 1000px; margin: 40px auto; padding: 20px; background: #f5f5f5; }
+        h1 { color: #333; }
+        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #fafafa; }
+        canvas { max-height: 400px; }
+    </style>
+</head>
+<body>
+    <h1>📱 iPhone 17 Pro 512GB Silver — Динамика цен</h1>
+
+    <div class="card">
+        <h2>Последние цены</h2>
+        <table id="priceTable">
+            <thead>
+                <tr><th>Магазин</th><th>Последняя цена</th><th>Обновлено</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>График</h2>
+        <canvas id="priceChart"></canvas>
+    </div>
+
+    <script>
+        async function loadData() {
+            const response = await fetch('data/prices.json');
+            const data = await response.json();
+            renderTable(data);
+            renderChart(data);
+        }
+
+        function renderTable(data) {
+            const tbody = document.querySelector('#priceTable tbody');
+            tbody.innerHTML = '';
+            for (const [store, entries] of Object.entries(data)) {
+                const last = entries[entries.length - 1];
+                tbody.innerHTML += `<tr>
+                    <td>${store}</td>
+                    <td><strong>${last.price.toLocaleString('ru-RU')} ₽</strong></td>
+                    <td>${last.date}</td>
+                </tr>`;
+            }
+        }
+
+        function renderChart(data) {
+            const allDates = [...new Set(
+                Object.values(data).flat().map(e => e.date)
+            )].sort();
+
+            const colors = ['#e74c3c', '#3498db', '#2ecc71', '#f39c12', '#9b59b6'];
+            const datasets = Object.entries(data).map(([store, entries], i) => ({
+                label: store,
+                data: allDates.map(date => {
+                    const entry = entries.find(e => e.date === date);
+                    return entry ? entry.price : null;
+                }),
+                borderColor: colors[i % colors.length],
+                backgroundColor: colors[i % colors.length] + '20',
+                tension: 0.3,
+                spanGaps: true
+            }));
+
+            new Chart(document.getElementById('priceChart'), {
+                type: 'line',
+                data: { labels: allDates, datasets },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: v => v.toLocaleString('ru-RU') + ' ₽'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        loadData().catch(console.error);
+    </script>
+</body>
+</html>
