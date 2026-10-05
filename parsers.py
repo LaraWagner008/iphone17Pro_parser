@@ -60,7 +60,7 @@ def parse_mvideo() -> int | None:
     url = "https://www.mvideo.ru/products/400480669"
     try:
         with sync_playwright() as p:
-            browser = p.chromium.launch(headless=False)
+            browser = p.chromium.launch(headless=True)
             page = browser.new_page()
             # Ждём загрузки и появления цены
             page.goto(url, timeout=30000, wait_until="domcontentloaded")
@@ -155,7 +155,7 @@ def parse_05ru() -> int | None:
     url = "https://05.ru/cat/396f7486/p/smartfon-apple-iphone-17-pro-12-gb-512-gb-beliy-bez-rustore-23982/"
     try:
         with sync_playwright() as p:
-            browser = p.chromium.launch(headless=False)  # False, если headless блокируется
+            browser = p.chromium.launch(headless=True)  # False, если headless блокируется
             page = browser.new_page()
             page.goto(url, timeout=30000, wait_until="domcontentloaded")
 
@@ -212,7 +212,7 @@ def parse_citilink() -> int | None:
     url = "https://www.citilink.ru/product/smartfon-apple-iphone-17-pro-a3523-512gb-serebristyi-3g-4g-1sim-6-3-12-2183033/properties/"
     try:
         with sync_playwright() as p:
-            browser = p.chromium.launch(headless=False)  # как у М.Видео и 05.ru
+            browser = p.chromium.launch(headless=True)  # как у М.Видео и 05.ru
             page = browser.new_page()
             page.goto(url, timeout=30000, wait_until="domcontentloaded")
             # Ждём, пока Qrator пропустит и цена отрисуется
