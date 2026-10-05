@@ -3,4 +3,3 @@ __pycache__/
 *.pyc 
 debug_*.html 
 prices.db 
-data/ 
