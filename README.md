@@ -43,7 +43,7 @@
 ---
 
 ## 📁 Структура проекта
-
+```
 iphone17Pro_parser/
 ├── .github/
 │ └── workflows/
@@ -56,7 +56,7 @@ iphone17Pro_parser/
 ├── parsers.py # Модуль с парсерами 5 магазинов
 ├── requirements.txt # Зависимости
 └── README.md # Этот файл
-
+```
 
 ---
 
