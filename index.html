@@ -10,6 +10,30 @@
         h1 { color: #333; }
         .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px; }
         table { width: 100%; border-collapse: collapse; }
+        
+                .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        .store-card {
+            background: #fafafa;
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+        .store-card h3 {
+            margin: 0 0 8px 0;
+            font-size: 16px;
+            color: #333;
+        }
+        .store-card p {
+            margin: 0;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
         th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
         th { background: #fafafa; }
         canvas { max-height: 400px; }
@@ -26,6 +50,32 @@
             </thead>
             <tbody></tbody>
         </table>
+    </div>
+
+        <div class="card">
+        <h2>О магазинах</h2>
+        <div class="store-grid">
+            <div class="store-card">
+                <h3>🛒 re-store</h3>
+                <p>Крупнейшая в России сеть магазинов техники Apple и премиальной электроники. До 2022 года была официальным дилером Apple, сейчас работает как мультибрендовый ритейлер.</p>
+            </div>
+            <div class="store-card">
+                <h3>🏬 05.ru</h3>
+                <p>Региональная сеть магазинов электроники и бытовой техники с филиалами в Дагестане и доставкой по России. Предлагает широкий ассортимент от смартфонов до крупногабаритной техники.</p>
+            </div>
+            <div class="store-card">
+                <h3>📱 real2</h3>
+                <p>Сеть салонов связи и электроники, представленная преимущественно в Дагестане. Специализируется на смартфонах, аксессуарах и услугах связи.</p>
+            </div>
+            <div class="store-card">
+                <h3>🏪 М.Видео</h3>
+                <p>Одна из крупнейших федеральных сетей по продаже электроники и бытовой техники в России. Широкий ассортимент, развитая сеть магазинов и программа лояльности M.Club.</p>
+            </div>
+            <div class="store-card">
+                <h3>💻 Citilink</h3>
+                <p>Старейший российский интернет-магазин цифровой и бытовой техники, работающий с 1997 года. Известен форматом «магазин-склад» с самовывозом и фокусом на компьютерные комплектующие.</p>
+            </div>
+        </div>
     </div>
 
     <div class="card">
