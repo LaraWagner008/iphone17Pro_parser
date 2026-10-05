@@ -62,9 +62,11 @@ def parse_mvideo() -> int | None:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            # Ждём загрузки и появления цены
+            page.goto("https://www.mvideo.ru/", timeout=30000, wait_until="domcontentloaded")
+            page.wait_for_timeout(3000)
             page.goto(url, timeout=30000, wait_until="domcontentloaded")
-            page.wait_for_selector("span.prices-base", timeout=15000)
+            page.wait_for_timeout(3000)
+            page.wait_for_selector("span.prices-base", timeout=30000)
             text = page.locator("span.prices-base").first.inner_text()
             browser.close()
 
@@ -208,15 +210,17 @@ def parse_real2() -> int | None:
 
 
 def parse_citilink() -> int | None:
-    """Парсит цену в Ситилинк через Playwright (Qrator, нужен реальный браузер)."""
+    """Парсит цену в Ситилинк через Playwright."""
     url = "https://www.citilink.ru/product/smartfon-apple-iphone-17-pro-a3523-512gb-serebristyi-3g-4g-1sim-6-3-12-2183033/properties/"
     try:
         with sync_playwright() as p:
-            browser = p.chromium.launch(headless=True)  # как у М.Видео и 05.ru
+            browser = p.chromium.launch(headless=True)
             page = browser.new_page()
+            page.goto("https://www.citilink.ru/", timeout=30000, wait_until="domcontentloaded")
+            page.wait_for_timeout(3000)
             page.goto(url, timeout=30000, wait_until="domcontentloaded")
-            # Ждём, пока Qrator пропустит и цена отрисуется
-            page.wait_for_selector("span[class*='MainPriceNumber']", timeout=20000)
+            page.wait_for_timeout(3000)
+            page.wait_for_selector("span[class*='MainPriceNumber']", timeout=30000)
             text = page.locator("span[class*='MainPriceNumber']").first.inner_text()
             browser.close()
 
